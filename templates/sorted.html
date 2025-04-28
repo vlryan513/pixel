@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sorted Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .person-gallery {
+            margin-bottom: 40px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 10px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .update-btn {
+            display: block;
+            margin: 0 auto 30px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sorted Images</h1>
+
+    <form action="{{ url_for('run_update_sort') }}">
+        <button class="update-btn" type="submit">Update</button>
+    </form>
+    <form action="{{ url_for('home') }}">
+        <button class="update-btn" type="submit">Return to Home</button>
+    </form>
+
+    {% for person, images in data.items() %}
+        <div class="person-gallery">
+            <h2>{{ person }}</h2>
+            {% if images %}
+                <div class="gallery-grid">
+                    {% for image in images %}
+                        <img src="{{ url_for('static', filename='images/' + image) }}" alt="{{ image }}">
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p><em>No images found.</em></p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</body>
+</html>

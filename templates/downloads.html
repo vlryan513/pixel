@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Gallery</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            padding: 20px;
+        }
+        .grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Gallery</h1>
+    <form action="{{ url_for('run_sort') }}">
+        <button type="submit">View Sorted Images</button>
+    </form>
+    <form action="{{ url_for('list_files') }}">
+        <button type="submit">View Downloaded Files</button>
+    </form>
+    <form action="{{ url_for('run_update') }}" method="post">
+        <button type="submit">Update</button>
+    </form>
+    <div class="grid">
+        {% for image in images %}
+            <img src="{{ image }}" alt="Image">
+        {% endfor %}
+    </div>
+</body>
+</html>
+
