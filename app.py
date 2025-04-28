@@ -137,3 +137,7 @@ def run_update_sort():
 @app.route('/sorted')
 def sorted():
     return render_template('sorted.html', data=face_db)
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
