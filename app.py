@@ -5,7 +5,7 @@ import re
 import shutil
 from deepface import DeepFace
 import cv2
-from utils import get_filename, update_images, update_sort, get_image_taken_time
+from utils import get_filename, update_images, update_sort, extract_datetime
 from pathlib import Path
 from datetime import datetime
 
@@ -30,6 +30,8 @@ def home():
                     'url': url_for('static', filename=f'images/{name}'),
                     'filename': name
                 })
+
+        image_info.sort(key=extract_datetime, reverse=True)
 
         return render_template('home_with_images.html', images=image_info)
     return render_template('home.html')
