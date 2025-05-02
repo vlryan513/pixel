@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -37,7 +37,7 @@
 <body>
     <h1>Sorted Images</h1>
 
-    <form action="{{ url_for('run_update_sort') }}">
+    <form action="{{ url_for('run_update_sort') }}" method="post">
         <button class="update-btn" type="submit">Update</button>
     </form>
     <form action="{{ url_for('home') }}">
@@ -58,5 +58,248 @@
             {% endif %}
         </div>
     {% endfor %}
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://static.nd.edu/" crossorigin>
+  <link rel="preconnect" href="https://emergency.nd.edu/">
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <meta name="author" content="Marketing Communications: Web | University of Notre Dame">
+  <meta name="apple-mobile-web-app-title" content="ND Web Theme">
+  <meta name="application-name" content="ND Web Theme">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@notredame">
+  <meta name="twitter:creator" content="@ndwebteam">
+  <meta name="twitter:image" property="og:image" content="https://static.nd.edu/images/webclips/default/webclip-1024.png">
+  <title>Sorted Image Gallery</title>
+  <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="https://static.nd.edu/images/monogram/monogram.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="https://static.nd.edu/images/webclips/default/webclip-180.png">
+  <meta name="theme-color" content="#002b5c">
+  <link rel="stylesheet" type="text/css" href="https://conductor.nd.edu/stylesheets/themes/ndt/v3/ndt.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/site.css') }}">
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            /* padding: 20px; */
+        }
+        h1 {
+            text-align: center;
+        }
+        .person-gallery {
+            margin-bottom: 40px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 10px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .update-btn {
+            display: block;
+            margin: 0 auto 30px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body vocab="https://schema.org/" class="nav-top-true full-width">
+  <!-- Skip links -->
+  <nav class="skip-links" aria-label="Skip links">
+    <ul>
+      <li><a href="#content" accesskey="C" title="Skip to content = C">Skip To Content</a></li>
+      <li><a href="#nav-top" accesskey="S" title="Skip to navigation = S">Skip To Navigation</a></li>
+    </ul>
+  </nav>
+
+  <div class="wrapper" id="wrapper">
+    <!-- Site Header -->
+    <header id="header" class="site-header">
+      <p class="mark-header"><a href="https://www.nd.edu/">University of Notre Dame</a></p>
+      <div class="site-title-group">
+        <p id="site-title" class="site-title"><a href="/" accesskey="1" title="Homepage shortcut key = 1">PIXEL</a></p>
+      </div>
+      <!-- Header Search/Nav  -->
+      <div class="nav-header">
+        <nav id="nav-top" class="nav-top" role="navigation" aria-label="Primary navigation">
+          <div id="primary">
+            <ul>
+              <li>A </a></li>
+              <li>B </a></li>
+              <li>C </a></li>
+             
+            </ul>
+            <div class="nav-search-wrapper">
+              <form method="get" action="/search/" id="search-nav-top" class="search-form" role="search" aria-label="Site search">
+                <input type="hidden" name="as_sitesearch" value="siteurl.nd.edu">
+                <input type="hidden" name="entqr" value="3">
+                <input type="search" name="q" class="search-input" id="search-input-nav-top" placeholder="Search this site" title="type your search term" aria-label="Site Search input">
+                <button class="search-button" type="submit" aria-label="Search"><svg class="icon" width="16" height="16" data-icon="search"><use xlink:href="#icon-search"></use></svg></button>
+                <button class="search-close search-toggle" aria-label="Close Search"><svg class="icon" width="16" height="16"><use xlink:href="#icon-close"></use></svg></button>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <!-- Mobile Navbar -->
+      <div class="nav-mobile-util">
+        <ul class="no-bullets">
+          <li><a href="/"><svg class="icon" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-home"></use></svg> Home</a></li>
+          <li><button class="btn-search search-toggle"><svg class="icon" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-search"></use></svg> Search</button></li>
+          <li><a href="#nav" class="nav-menu nav-skip"><svg version="1.1" class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve"><line class="ni ni1" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" x1="0.98" y1="2" x2="18.94" y2="2" /><line class="ni ni2" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" x1="0.98" y1="8.69" x2="18.94" y2="8.69" /></svg><span class="ni ni3">Menu</span></a></li>
+        </ul>
+        <div class="nav-search-wrapper">
+          <form method="get" action="/search/" id="search-navbar-mobile" class="search-form" role="search" aria-label="Site search">
+            <input type="hidden" name="as_sitesearch" value="">
+            <input type="hidden" name="entqr" value="3">
+            <input type="search" name="q" class="search-input" id="search-input-navbar-mobile" placeholder="Search this site" title="type your search term" aria-label="Site Search input">
+            <button class="search-button" type="submit" aria-label="Search"><svg class="icon" width="16" height="16"><use xlink:href="#icon-search"></use></svg></button>
+            <button class="search-close search-toggle" aria-label="Close Search"><svg class="icon" width="16" height="16"><use xlink:href="#icon-close"></use></svg></button>
+          </form>
+        </div>
+      </div>
+    </header>
+    <!-- Site Content -->
+    <div id="content" class="site-content">
+
+    <!-- Page Header -->
+    <!--<div class="page-header has-title has-image">
+      <p class="page-title" aria-hidden="true">Default Home Page</p>
+      <p class="page-lede" aria-hidden="true">A default home page with news and events.</p>
+      <p class="page-image">
+          <img src="//placehold.it/800x450/?text=FPO" width="800" height="450"
+               srcset="//placehold.it/800x450/?text=FPO 800w,
+                       //placehold.it/1200x675/?text=FPO 1200w,
+                       //placehold.it/1600x900/?text=FPO 1600w"
+               sizes="(min-width:768px) 75vw, 100vw"
+               alt="Header image">
+      </p>
+    </div> -->
+
+    <main class="page-main" role="main">
+
+
+      <h1 class="page-title">Home Page</h1>
+      <!--<p class="page-lede">A default home page with news and events.</p>
+      -->
+      <!-- Page Intro -->
+      <div class="block-center">
+
+        <h3>Sorted Images</h3>
+
+            <form action="{{ url_for('run_update_sort') }}" method="post">
+                <button class="update-btn" type="submit">Update</button>
+            </form>
+            <form action="{{ url_for('home') }}">
+                <button class="update-btn" type="submit">Return to Home</button>
+            </form>
+
+            {% for person, images in data.items() %}
+                <div class="person-gallery">
+                    <h2>{{ person }}</h2>
+                    {% if images %}
+                        <div class="gallery-grid">
+                            {% for image in images %}
+                                <img src="{{ url_for('static', filename='images/' + image) }}" alt="{{ image }}">
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p><em>No images found.</em></p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+       
+      </div>
+
+      </main>
+      <div class="page-sidebar">
+        <!-- Full Nav -->
+        <nav id="nav" class="nav-site nav-full" role="navigation" aria-label="Primary navigation">
+          <ul class="depth_1">
+            <li class="active"><a href="#">Home</a>
+            <li>A </a></li>
+            <li>B </a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- Site Footer -->
+    <footer id="footer" class="site-footer" role="contentinfo">
+      <div class="footer-org" typeof="Organization" resource="#siteorg">
+        <meta property="parentOrganization" resource="#parentorg" content="University of Notre Dame">
+        <!-- Organizational Breadcrumbs -->
+        <ul class="footer-breadcrumbs">
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+        </ul>
+        <p><a href="/" class="site-link" property="url"><span property="name">PIXEL</span></a></p>
+        <div class="footer-contacts">
+          <p class="contact-info">
+            <span class="address" property="address" typeof="PostalAddress">
+              <span property="streetAddress">205 Stinson Remick Hall</span><br>
+              <span property="addressLocality">Notre Dame</span>, <span property="addressRegion">IN</span> <span property="postalCode">46556</span> <span property="addressCountry">USA</span>
+            </span>
+            <span class="footer-phone" property="telephone" content="+1 (574) 555-1234">Phone <a href="tel:(574)555-1234">(574) 555-1234</a></span>
+            <!-- <span class="footer-email" property="email"><a href="mailto:example@nd.edu">example@nd.edu</a></span> -->
+          </p>
+          <nav class="social" aria-label="Social media navigation" vocab="">
+            <ul>
+              <!-- Site-specific Social Media -->
+              <!-- <li><a class="soc-facebook" href="#" rel="noopener" aria-label="SmartCycle on Facebook"><svg class="icon" width="16" height="16" aria-hidden="true"> <use xlink:href="#icon-facebook"></use> </svg> Facebook</a></li>
+              <li><a class="soc-twitter" href="#" rel="noopener" aria-label="SmartCycle on Twitter"><svg class="icon" width="16" height="16" aria-hidden="true"> <use xlink:href="#icon-twitter"></use> </svg> Twitter</a></li>
+              <li><a class="soc-instagram" href="#" rel="noopener" aria-label="SmartCycle on Instagram"><svg class="icon" width="16" height="16" aria-hidden="true"> <use xlink:href="#icon-instagram"></use> </svg> Instagram</a></li> -->
+            </ul>
+          </nav>
+        </div>
+        <div property="logo" typeof="ImageObject">
+          <meta property="url" content="https://static.nd.edu/images/webclips/default/webclip-60.png">
+        </div>
+        <p class="copyright"><a href="https://www.nd.edu/copyright/">&copy; 2023</a> <a href="https://www.nd.edu">University of Notre Dame</a></p>
+      </div>
+      <div class="footer-parent" property="parentOrganization" typeof="CollegeOrUniversity" resource="#parentorg">
+        <meta property="name" content="University of Notre Dame">
+        <a href="https://www.nd.edu/" class="mark-footer" property="url logo" typeof="ImageObject" aria-label="University of Notre Dame">
+          <img src="https://static.nd.edu/images/marks/gray/ndmark.svg" width="250" height="60" alt="University of Notre Dame" property="url">
+        </a>
+        <div class="footer-parent-links">
+          <nav aria-label="Footer links navigation">
+            <ul class="footer-links">
+              <!-- Global Links -->
+              <li><a href="https://search.nd.edu/" aria-label="Search Notre Dame">Search</a></li>
+              <li><a href="https://mobile.nd.edu/" aria-label="Notre Dame Mobile App">Mobile App</a></li>
+              <li><a href="https://news.nd.edu/" aria-label="Notre Dame News">News</a></li>
+              <li><a href="https://events.nd.edu/" aria-label="Notre Dame Events">Events</a></li>
+              <li><a href="https://www.nd.edu/visit/" aria-label="Visit Notre Dame">Visit</a></li>
+              <li><a href="https://www.nd.edu/about/accessibility/" aria-label="Notre Dame Accessibility Information">Accessibility</a></li>
+            </ul>
+          </nav>
+          <nav class="social" aria-label="Social media navigation" vocab="">
+            <ul>
+              <!-- Global Social Media -->
+              <li><a class="soc-facebook" href="https://www.facebook.com/notredame/" rel="noopener" aria-label="Notre Dame on Facebook"><svg class="icon" width="16" height="16" aria-hidden="true"> <use xlink:href="#icon-facebook"></use> </svg> Facebook</a></li>
+              <li><a class="soc-twitter" href="https://twitter.com/NotreDame/" rel="noopener" aria-label="Notre Dame on Twitter"><svg class="icon" width="16" height="16" aria-hidden="true"> <use xlink:href="#icon-twitter"></use> </svg> Twitter</a></li>
+              <li><a class="soc-instagram" href="https://www.instagram.com/notredame/" rel="noopener" aria-label="Notre Dame on Instagram"><svg class="icon" width="16" height="16" aria-hidden="true"> <use xlink:href="#icon-instagram"></use> </svg> Instagram</a></li>
+              <li><a class="soc-youtube" href="https://www.youtube.com/user/NDdotEDU" rel="noopener" aria-label="Notre Dame on YouTube"><svg class="icon" width="16" height="16" aria-hidden="true"> <use xlink:href="#icon-youtube"></use> </svg> YouTube</a></li>
+              <li><a class="soc-linkedin" href="https://www.linkedin.com/school/university-of-notre-dame/" rel="noopener" aria-label="Notre Dame on LinkedIn"><svg class="icon" width="16" height="16" aria-hidden="true"> <use xlink:href="#icon-linkedin"></use> </svg> LinkedIn</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </footer>
+  </div><!-- .wrapper -->
+  <script src="https://conductor.nd.edu/javascripts/themes/ndt/v3/ndt.js"></script>
+  <script src="./javascripts/site.js"></script>
 </body>
 </html>

@@ -4,6 +4,23 @@ import requests
 from deepface import DeepFace
 import cv2
 import os
+from PIL import Image
+from PIL.ExifTags import TAGS
+
+# get time taken
+def get_image_taken_time(image_path):
+    try:
+        image = Image.open(image_path)
+        exif_data = image._getexif()
+        if not exif_data:
+            return None
+        for tag_id, value in exif_data.items():
+            tag = TAGS.get(tag_id, tag_id)
+            if tag == "DateTimeOriginal":
+                return value  # e.g., "2023:08:19 15:27:03"
+    except Exception:
+        return None
+    return None
 
 # function to get actual file name
 def get_filename(cd):

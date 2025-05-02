@@ -5,8 +5,9 @@ import re
 import shutil
 from deepface import DeepFace
 import cv2
-from utils import get_filename, update_images, update_sort
+from utils import get_filename, update_images, update_sort, get_image_taken_time
 from pathlib import Path
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -21,8 +22,16 @@ def home():
     if folder.exists():
         image_folder = os.path.join('static', 'images')
         image_names = os.listdir(image_folder)
-        image_paths = [url_for('static', filename=f'images/{name}') for name in image_names]
-        return render_template('home_with_images.html',images=image_paths)
+        image_info = []
+
+        for name in image_names:
+            if name.endswith(".jpg"):  # optional filter
+                image_info.append({
+                    'url': url_for('static', filename=f'images/{name}'),
+                    'filename': name
+                })
+
+        return render_template('home_with_images.html', images=image_info)
     return render_template('home.html')
 
 @app.route('/run-download', methods=['GET'])
@@ -70,6 +79,9 @@ def run_sort():
 
     # list all images
     image_files = [f for f in os.listdir(image_folder) if f.endswith(('.jpg', '.png','.JPG'))]
+
+    # if image file is already in the face_db, take it out of the list
+    image_files = [img for img in image_files if img not in face_db]
 
     # item for images with no faces
     face_db["no_faces"] = []
